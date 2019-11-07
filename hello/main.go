@@ -8,7 +8,7 @@ const (
 
 // Hello function takes as argument a name and returns a greeting
 // for that person
-func Hello(name string) string {
+func Hello(name, language string) string {
 	if name == "" {
 		name = "World"
 	}
@@ -16,5 +16,5 @@ func Hello(name string) string {
 }
 
 func main() {
-	fmt.Printf(Hello(""))
+	fmt.Printf(Hello("", ""))
 }
