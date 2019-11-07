@@ -3,9 +3,11 @@ package main
 import "fmt"
 
 const (
+	french             = "French"
+	spanish            = "Spanish"
 	englishHelloPrefix = "Hello, "
-	spanishHelloPrefix = "Hola, "
 	frenchHelloPrefix  = "Bonjour, "
+	spanishHelloPrefix = "Hola, "
 )
 
 // Hello function takes as argument a name and returns a greeting
@@ -14,12 +16,15 @@ func Hello(name, language string) string {
 	if name == "" {
 		name = "World"
 	}
-	if language == "Spanish" {
-		return spanishHelloPrefix + name
-	} else if language == "French" {
-		return frenchHelloPrefix + name
+
+	prefix := englishHelloPrefix
+	switch language {
+	case french:
+		prefix = frenchHelloPrefix
+	case spanish:
+		prefix = spanishHelloPrefix
 	}
-	return englishHelloPrefix + name
+	return prefix + name
 }
 
 func main() {
