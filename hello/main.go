@@ -4,6 +4,7 @@ import "fmt"
 
 const (
 	englishHelloPrefix = "Hello, "
+	spanishHelloPrefix = "Hola, "
 )
 
 // Hello function takes as argument a name and returns a greeting
@@ -13,7 +14,7 @@ func Hello(name, language string) string {
 		name = "World"
 	}
 	if language == "Spanish" {
-		return "Hola, " + name
+		return spanishHelloPrefix + name
 	}
 	return  englishHelloPrefix + name
 }
