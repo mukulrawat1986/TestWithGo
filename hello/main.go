@@ -2,11 +2,12 @@ package main
 
 import "fmt"
 
+
 // Hello function returns a string
-func Hello() string {
-	return "Hello, World!"
+func Hello(name string) string {
+	return "Hello, " + name
 }
 
 func main() {
-	fmt.Printf(Hello())
+	fmt.Printf(Hello(""))
 }
