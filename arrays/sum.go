@@ -9,4 +9,10 @@ func Sum(numbers []int) int {
 	return sum
 }
 
+// SumAll takes varying number of slices and returns a new slice
+// containing the total for each slice passed in
+func SumAll(numbers ...[]int) []int {
+	return []int{}
+}
+
 func main() {}
