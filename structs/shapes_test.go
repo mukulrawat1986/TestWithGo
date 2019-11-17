@@ -3,18 +3,22 @@ package main
 import "testing"
 
 func TestArea(t *testing.T) {
+
+	checkArea := func(t *testing.T, shape Shape, want float64) {
+		t.Helper()
+		got := shape.Area()
+		if got != want {
+			t.Errorf("Got %v, want %v", got, want)
+		}
+	}
+
 	t.Run("rectangle", func(t *testing.T) {
 		r := Rectangle{
 			Width:  10.0,
 			Height: 10.0,
 		}
 
-		got := r.Area()
-		want := 100.0
-
-		if got != want {
-			t.Errorf("got %v, want %v", got, want)
-		}
+		checkArea(t, r, 100.0)
 	})
 
 	t.Run("circle", func(t *testing.T) {
@@ -22,11 +26,6 @@ func TestArea(t *testing.T) {
 			Radius: 10.0,
 		}
 
-		got := c.Area()
-		want := 314.1592653589793
-
-		if got != want {
-			t.Errorf("got %v want %v", got, want)
-		}
+		checkArea(t, c, 314.1592653589793)
 	})
 }
