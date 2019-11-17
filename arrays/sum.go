@@ -19,4 +19,10 @@ func SumAll(numbersToSum ...[]int) []int {
 	return sums
 }
 
+// SumAllTails calculates the total of the tails of each slice
+// The tail of a collection is all the items apart from the first one
+func SumAllTails(numbersToSum ...[]int) []int {
+	return []int{}
+}
+
 func main() {}
