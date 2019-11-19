@@ -3,29 +3,31 @@ package main
 import "testing"
 
 func TestArea(t *testing.T) {
-
-	checkArea := func(t *testing.T, shape Shape, want float64) {
-		t.Helper()
-		got := shape.Area()
-		if got != want {
-			t.Errorf("Got %v, want %v", got, want)
-		}
+	areaTests := []struct {
+		shape Shape
+		want  float64
+	}{
+		{
+			Rectangle{
+				12,
+				6,
+			},
+			72.0,
+		},
+		{
+			Circle{
+				10.0,
+			},
+			314.1592653589793,
+		},
 	}
 
-	t.Run("rectangle", func(t *testing.T) {
-		r := Rectangle{
-			Width:  10.0,
-			Height: 10.0,
+	for _, tt := range areaTests {
+		got := tt.shape.Area()
+		want := tt.want
+
+		if got != want {
+			t.Errorf("got %g, want %g", got, want)
 		}
-
-		checkArea(t, r, 100.0)
-	})
-
-	t.Run("circle", func(t *testing.T) {
-		c := Circle{
-			Radius: 10.0,
-		}
-
-		checkArea(t, c, 314.1592653589793)
-	})
+	}
 }
