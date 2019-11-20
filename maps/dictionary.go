@@ -6,6 +6,9 @@ var (
 	// ErrNotFound is the error returned when a word does not exist in the
 	// dictionary
 	ErrNotFound = errors.New("could not find the word you were looking for")
+	// ErrWordExists is the error returned when we try to add a word which
+	// already exists in the dictionary
+	ErrWordExists = errors.New("cannot add word because it already exists")
 )
 
 // Dictionary type based on the map[string]string type
