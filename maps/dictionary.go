@@ -20,4 +20,9 @@ func (d Dictionary) Search(word string) (string, error) {
 	return definition, nil
 }
 
+// Add method to add new word and definition in the dictionary
+func (d Dictionary) Add(word, definition string) {
+
+}
+
 func main() {}
