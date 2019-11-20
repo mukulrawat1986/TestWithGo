@@ -32,10 +32,6 @@ func assertString(t *testing.T, got, want string) {
 func assertError(t *testing.T, got, want error) {
 	t.Helper()
 
-	if got == nil {
-		t.Fatal("expected to get an error")
-	}
-
 	if got != want {
 		t.Errorf("got error %q want %q", got, want)
 	}
@@ -48,7 +44,20 @@ func TestAdd(t *testing.T) {
 		word := "test"
 		definition := "this is just a test"
 		err := dictionary.Add(word, definition)
-		assertNoError(t, err)
+		assertError(t, err, nil)
+		assertDefinition(t, dictionary, word, definition)
+	})
+
+	t.Run("existing word", func(t *testing.T) {
+		word := "test"
+		definition := "this is just a test"
+		dictionary := Dictionary{
+			word: definition,
+		}
+
+		err := dictionary.Add(word, "new test")
+
+		assertError(t, err, ErrWordExists)
 		assertDefinition(t, dictionary, word, definition)
 	})
 }
@@ -62,12 +71,5 @@ func assertDefinition(t *testing.T, dictionary Dictionary, word, definition stri
 	}
 	if definition != got {
 		t.Errorf("got %q want %q", got, definition)
-	}
-}
-
-func assertNoError(t *testing.T, got error) {
-	t.Helper()
-	if got != nil {
-		t.Fatal("got an error which was not expected: ", got)
 	}
 }
