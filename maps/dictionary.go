@@ -25,7 +25,16 @@ func (d Dictionary) Search(word string) (string, error) {
 
 // Add method to add new word and definition in the dictionary
 func (d Dictionary) Add(word, definition string) error {
-	d[word] = definition
+	_, err := d.Search(word)
+
+	switch err {
+	case ErrNotFound:
+		d[word] = definition
+	case nil:
+		return ErrWordExists
+	default:
+		return err
+	}
 	return nil
 }
 
