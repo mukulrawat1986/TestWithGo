@@ -3,13 +3,16 @@ package main
 import "testing"
 
 func TestSearch(t *testing.T) {
+
 	dictionary := Dictionary{
 		"test": "this is just a test",
 	}
 
-	got := dictionary.Search("test")
-	want := "this is just a test"
-	assertString(t, got, want)
+	t.Run("known word", func(t *testing.T) {
+		got := dictionary.Search("test")
+		want := "this is just a test"
+		assertString(t, got, want)
+	})
 }
 
 func assertString(t *testing.T, got, want string) {
