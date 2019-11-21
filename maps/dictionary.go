@@ -61,4 +61,9 @@ func (d Dictionary) Update(word, definition string) error {
 	}
 }
 
+// Delete method to delete a word and its definition from the dictionary
+func (d Dictionary) Delete(word string) {
+
+}
+
 func main() {}
