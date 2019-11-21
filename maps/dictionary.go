@@ -45,7 +45,7 @@ func (d Dictionary) Add(word, definition string) error {
 
 // Update method updates the definition of a word present in the dictionary`
 func (d Dictionary) Update(word, definition string) {
-
+	d[word] = definition
 }
 
 func main() {}
