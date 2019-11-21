@@ -7,6 +7,9 @@ const (
 	// ErrWordExists is the error returned when we try to add a word which
 	// already exists in the dictionary
 	ErrWordExists = DictionaryErr("cannot add word because it already exists")
+	// ErrWordDoesNotExist is the error returned when we try to update a word
+	// which does not exist in the dictionary
+	ErrWordDoesNotExist = DictionaryErr("cannot update word because it does not exist")
 )
 
 // DictionaryErr type that implements the error interface
