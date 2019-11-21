@@ -21,22 +21,6 @@ func TestSearch(t *testing.T) {
 	})
 }
 
-func assertString(t *testing.T, got, want string) {
-	t.Helper()
-
-	if got != want {
-		t.Errorf("got %q want %q", got, want)
-	}
-}
-
-func assertError(t *testing.T, got, want error) {
-	t.Helper()
-
-	if got != want {
-		t.Errorf("got error %q want %q", got, want)
-	}
-}
-
 func TestAdd(t *testing.T) {
 
 	t.Run("new word", func(t *testing.T) {
@@ -62,6 +46,21 @@ func TestAdd(t *testing.T) {
 	})
 }
 
+func TestUpdate(t *testing.T) {
+
+	word := "test"
+	definition := "this is just a test"
+	dictionary := Dictionary{
+		word: definition,
+	}
+
+	newDefinition := "new definition"
+
+	dictionary.Update(word, newDefinition)
+
+	assertDefinition(t, dictionary, word, newDefinition)
+}
+
 func assertDefinition(t *testing.T, dictionary Dictionary, word, definition string) {
 	t.Helper()
 
@@ -74,16 +73,18 @@ func assertDefinition(t *testing.T, dictionary Dictionary, word, definition stri
 	}
 }
 
-func TestUpdate(t *testing.T) {
-	word := "test"
-	definition := "this is just a test"
-	dictionary := Dictionary{
-		word: definition,
+func assertString(t *testing.T, got, want string) {
+	t.Helper()
+
+	if got != want {
+		t.Errorf("got %q want %q", got, want)
 	}
+}
 
-	newDefinition := "new definition"
+func assertError(t *testing.T, got, want error) {
+	t.Helper()
 
-	dictionary.Update(word, newDefinition)
-
-	assertDefinition(t, dictionary, word, newDefinition)
+	if got != want {
+		t.Errorf("got error %q want %q", got, want)
+	}
 }
