@@ -1,15 +1,20 @@
 package main
 
-import "errors"
-
-var (
+const (
 	// ErrNotFound is the error returned when a word does not exist in the
 	// dictionary
-	ErrNotFound = errors.New("could not find the word you were looking for")
+	ErrNotFound = DictionaryErr("could not find the word you were looking for")
 	// ErrWordExists is the error returned when we try to add a word which
 	// already exists in the dictionary
-	ErrWordExists = errors.New("cannot add word because it already exists")
+	ErrWordExists = DictionaryErr("cannot add word because it already exists")
 )
+
+// DictionaryErr type that implements the error interface
+type DictionaryErr string
+
+func (e DictionaryErr) Error() string {
+	return string(e)
+}
 
 // Dictionary type based on the map[string]string type
 type Dictionary map[string]string
