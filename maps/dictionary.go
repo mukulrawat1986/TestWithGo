@@ -38,18 +38,27 @@ func (d Dictionary) Add(word, definition string) error {
 	switch err {
 	case ErrNotFound:
 		d[word] = definition
+		return nil
 	case nil:
 		return ErrWordExists
 	default:
 		return err
 	}
-	return nil
 }
 
-// Update method updates the definition of a word present in the dictionary`
+// Update method updates the definition of a word present in the dictionary
 func (d Dictionary) Update(word, definition string) error {
-	d[word] = definition
-	return nil
+	_, err := d.Search(word)
+
+	switch err {
+	case ErrNotFound:
+		return ErrWordDoesNotExist
+	case nil:
+		d[word] = definition
+		return nil
+	default:
+		return err
+	}
 }
 
 func main() {}
