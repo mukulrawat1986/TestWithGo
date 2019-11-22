@@ -8,7 +8,10 @@ import (
 
 // Countdown function prints out the countdown on the commandline
 func Countdown(w io.Writer) {
-	fmt.Fprintf(w, "3")
+	for i := 3; i >= 1; i-- {
+		fmt.Fprintln(w, i)
+	}
+	fmt.Fprintf(w, "Go!")
 }
 
 func main() {
