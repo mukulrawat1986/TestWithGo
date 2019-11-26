@@ -5,30 +5,38 @@ import (
 	"testing"
 )
 
-type SpySleeper struct {
-	Calls int
+const (
+	sleep = "sleep"
+	write = "write"
+)
+
+type CountdownOperationSpy struct {
+	Calls []string
 }
 
-func (s *SpySleeper) Sleep() {
-	s.Calls++
+func (s *CountdownOperationSpy) Sleep() {
+	s.Calls = append(s.Calls, sleep)
+}
+
+func (s *CountdownOperationSpy) Write(p []byte) (n int, err error) {
+	s.Calls = append(s.Calls, write)
+	return
 }
 
 func TestCountdown(t *testing.T) {
-	// we create a buffer where the printing takes place that
-	// we can test
-	buffer := &bytes.Buffer{}
-	spySleeper := &SpySleeper{}
 
-	Countdown(buffer, spySleeper)
+	t.Run("print 3 to Go!", func(t *testing.T) {
+		// we create a buffer where the printing takes place that
+		// we can test
+		buffer := &bytes.Buffer{}
 
-	got := buffer.String()
-	want := "3\n2\n1\nGo!"
+		Countdown(buffer, &CountdownOperationSpy{})
 
-	if got != want {
-		t.Errorf("got %q want %q", got, want)
-	}
+		got := buffer.String()
+		want := "3\n2\n1\nGo!"
 
-	if spySleeper.Calls != 4 {
-		t.Errorf("not enough calls to sleeper, want 4 got %d", spySleeper.Calls)
-	}
+		if got != want {
+			t.Errorf("got %q want %q", got, want)
+		}
+	})
 }
